@@ -454,10 +454,14 @@ a{ color:inherit; }
   gap:clamp(22px, 3vw, 36px);
   transform:none;
 }
-.founders-carousel.no-swiper .founder-slide{ width:auto; }
+.founders-carousel.no-swiper .founder-slide{ width:auto; align-self:stretch; }
 .founders-carousel.no-swiper .founder{
   opacity:1; transform:none; pointer-events:none; cursor:default;
+  height:100%;
+  display:flex;
+  flex-direction:column;
 }
+.founders-carousel.no-swiper .founder a.li{ margin-top:auto; padding-top:16px; }
 .founders-carousel.no-swiper .carousel-btn{ display:none; }
 
 /* echoes a filled seat from the table */
