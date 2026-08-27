@@ -1057,8 +1057,7 @@ a{ color:inherit; }
           <p class="lede">Tell us who you are. If it's a yes, you'll be in the WhatsApp group the same week.</p>
         </div>
 
-      <form id="seatForm" name="seatForm" data-netlify="true" novalidate>
-        <input type="hidden" name="form-name" value="seatForm">
+      <form id="seatForm" novalidate>
         <div class="form-grid">
           <div class="field">
             <label for="f-name">Your name</label>
@@ -1142,17 +1141,6 @@ a{ color:inherit; }
     submitBtn.textContent = 'Sending…';
 
     var data = Object.fromEntries(new FormData(form));
-
-    // Log the submission to Netlify's own Forms dashboard (Site → Forms).
-    // Best-effort: this is a secondary record, so a failure here shouldn't
-    // block the email notification below or show as an error to the user.
-    fetch('/', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: Object.keys(data).map(function(k){
-        return encodeURIComponent(k) + '=' + encodeURIComponent(data[k]);
-      }).join('&')
-    }).catch(function(){});
 
     fetch('/.netlify/functions/send-seat-request', {
       method: 'POST',
