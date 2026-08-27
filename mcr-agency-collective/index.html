@@ -1,0 +1,1418 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MCR Agency Collective — A private dinner for agency people</title>
+<meta name="description" content="An invite-only quarterly dinner for agency founders and senior decision-makers in Manchester. No pitches, no salespeople. First dinner Thursday 24 September.">
+<meta property="og:title" content="MCR Agency Collective">
+<meta property="og:description" content="A private room, a long table, and nobody selling anything. Invite-only dinners for agency founders in Manchester.">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#0E1420">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,300..800&family=IBM+Plex+Mono:wght@400;500&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://use.typekit.net/lkd2xvn.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+
+<style>
+/* ============================================================
+   EDIT THESE FIRST
+   - Group name appears in the header, <title> and footer.
+   - Seat counts: search for "SEATS" below (SVG + the line under it).
+   - Date/venue: search for "DOCKET".
+   - Form endpoint: search for "FORM ENDPOINT" in the script.
+   ============================================================ */
+
+:root{
+  --ink:      #0E1420;   /* the room after dark */
+  --ink-2:    #151D2C;   /* raised surfaces */
+  --line:     #253044;   /* hairlines */
+  --bone:     #EDE7DC;   /* linen — primary text */
+  --muted:    #8A93A5;   /* utility text */
+  --brass:    #C79A4F;   /* lamplight, cutlery — the only accent */
+  --brass-lit:#E8C583;
+  --claret:   #7A2739;   /* used once, on the seal */
+
+  --display: "bely", "Bricolage Grotesque", "Instrument Sans", system-ui, sans-serif;
+  --body:    "Instrument Sans", system-ui, -apple-system, sans-serif;
+  --mono:    "IBM Plex Mono", ui-monospace, monospace;
+
+  --gutter: clamp(16px, 3vw, 48px);
+  --maxw: 1200px;
+}
+
+*,*::before,*::after{ box-sizing:border-box; }
+
+html{ scroll-behavior:smooth; }
+
+body{
+  margin:0;
+  background:var(--ink);
+  color:var(--bone);
+  font-family:var(--body);
+  font-size:17px;
+  line-height:1.6;
+  font-optical-sizing:auto;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+
+a{ color:inherit; }
+
+/* subtle grain, ties every surface — ink, photos, ink-2 — into one room */
+.grain{
+  position:fixed; inset:0; z-index:1000; pointer-events:none;
+  opacity:.045; mix-blend-mode:overlay;
+  background-image:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="140" height="140"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="2" stitchTiles="stitch"/><feColorMatrix type="saturate" values="0"/></filter><rect width="100%" height="100%" filter="url(%23n)"/></svg>');
+  background-size:140px 140px;
+}
+
+:focus-visible{
+  outline:2px solid var(--brass-lit);
+  outline-offset:3px;
+  border-radius:2px;
+}
+
+/* ---------- shared layout ---------- */
+
+.wrap{
+  width:100%;
+  max-width:var(--maxw);
+  margin-inline:auto;
+  padding-inline:var(--gutter);
+}
+
+.band{ padding-block:clamp(64px, 10vw, 118px); }
+.band + .band{ border-top:1px solid var(--line); }
+
+.eyebrow{
+  font-family:var(--mono);
+  font-size:11px;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+  color:var(--brass);
+  margin:0 0 22px;
+}
+
+.band-title{
+  font-family:var(--display);
+  font-weight:500;
+  font-size:clamp(38px, 6.4vw, 68px);
+  line-height:1.1;
+  letter-spacing:-.022em;
+  margin:0 0 14px;
+}
+
+.lede{
+  color:var(--muted);
+  max-width:56ch;
+  margin:0;
+}
+
+/* ---------- header ---------- */
+
+.topbar{
+  position:sticky; top:0; z-index:50;
+  display:flex; align-items:center; justify-content:space-between;
+  gap:16px;
+  padding:14px var(--gutter);
+  background:color-mix(in srgb, var(--ink) 88%, transparent);
+  backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--line);
+}
+
+.wordmark{
+  font-family:var(--display);
+  font-size:17px;
+  font-weight:700;
+  letter-spacing:-.02em;
+  text-decoration:none;
+  white-space:nowrap;
+}
+.wordmark span{ color:var(--brass); }
+
+.seal{
+  font-family:var(--mono);
+  font-size:10px;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  color:var(--muted);
+  border:1px solid var(--line);
+  border-left:2px solid var(--claret);
+  padding:5px 10px;
+  white-space:nowrap;
+}
+
+/* ---------- hero ---------- */
+
+.hero{
+  padding-block:clamp(52px, 9vw, 96px) clamp(40px, 6vw, 72px);
+  text-align:center;
+}
+
+.hero h1{
+  font-family:var(--display);
+  font-weight:500;
+  font-size:clamp(44px, 8.6vw, 92px);
+  line-height:1.02;
+  letter-spacing:-.034em;
+  margin:0 auto 22px;
+  max-width:16ch;
+  text-wrap:balance;
+}
+.hero h1 em{
+  font-style:normal;
+  color:var(--brass-lit);
+}
+
+.hero-sub{
+  color:var(--muted);
+  max-width:52ch;
+  margin:0 auto;
+  font-size:clamp(16px, 1.9vw, 19px);
+}
+
+/* ---------- SIGNATURE: the table ---------- */
+
+.table-figure{
+  margin:clamp(28px, 5vw, 52px) 0 0;
+}
+.table-figure svg{
+  display:block;
+  width:100%;
+  height:auto;
+  max-width:820px;
+  margin-inline:auto;
+  overflow:visible;
+}
+
+.seat-count{
+  font-family:var(--mono);
+  font-size:12px;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:var(--brass);
+  margin:14px 0 0;
+}
+.seat-count b{ font-weight:500; color:var(--brass-lit); }
+
+.hero-cta{ margin-top:clamp(28px, 4vw, 42px); }
+
+/* buttons */
+.btn{
+  display:inline-block;
+  font-family:var(--mono);
+  font-size:12px;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  text-decoration:none;
+  padding:15px 30px;
+  border:1px solid var(--brass);
+  color:var(--ink);
+  background:var(--brass);
+  cursor:pointer;
+  transition:background .22s ease, transform .22s ease, box-shadow .22s ease;
+}
+.btn:hover{
+  background:var(--brass-lit);
+  border-color:var(--brass-lit);
+  transform:translateY(-2px);
+  box-shadow:0 10px 28px -14px rgba(232,197,131,.7);
+}
+
+/* ---------- is / isn't ---------- */
+
+.ledger{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:clamp(28px, 5vw, 72px);
+  margin-top:44px;
+}
+
+.ledger h3{
+  font-family:var(--mono);
+  font-size:11px;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+  font-weight:500;
+  margin:0 0 20px;
+  padding-bottom:12px;
+  border-bottom:1px solid var(--line);
+}
+.col-is{
+  padding:26px 28px 6px;
+  background:linear-gradient(180deg, rgba(199,154,79,.07), transparent 65%);
+  border-left:2px solid var(--brass);
+}
+.col-isnt{
+  padding:26px 28px 6px;
+  border-left:2px solid var(--line);
+}
+.col-is h3{ color:var(--brass); }
+.col-isnt h3{ color:var(--muted); }
+
+.ledger ul{ list-style:none; margin:0; padding:0; }
+.ledger li{
+  display:flex;
+  gap:12px;
+  padding:12px 0;
+  font-size:16px;
+  line-height:1.45;
+}
+.ledger li::before{
+  font-family:var(--mono);
+  font-size:13px;
+  flex:0 0 auto;
+  line-height:1.5;
+}
+.col-is li::before{ content:"—"; color:var(--brass); }
+.col-isnt li{ color:var(--muted); }
+.col-isnt li::before{ content:"\00d7"; color:#4E5769; }
+.col-isnt li span{ text-decoration:line-through; text-decoration-color:#3A4356; }
+
+/* ---------- DOCKET: the first dinner ---------- */
+
+/* image stays flush with the section's top edge; the content below gets
+   the same padding as the section's own bottom, so the gap above the
+   heading matches the gap below the docket exactly */
+.dinner-band{ padding-top:0; }
+.dinner-band .wrap{ padding-top:clamp(64px, 10vw, 118px); }
+
+.docket-grid{
+  display:grid;
+  grid-template-columns:.8fr 1fr;
+  gap:clamp(32px, 5vw, 72px);
+  align-items:start;
+}
+.dinner-intro .lede{ margin-top:14px; }
+
+.docket{
+  background:var(--ink-2);
+  border:1px solid var(--line);
+  border-top:2px solid var(--brass);
+  padding:clamp(26px, 4vw, 40px);
+}
+.docket dl{
+  display:grid;
+  grid-template-columns:auto 1fr;
+  gap:0 clamp(20px, 4vw, 44px);
+  margin:0;
+}
+.docket dt{
+  font-family:var(--mono);
+  font-size:11px;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  color:var(--muted);
+  padding:15px 0;
+  border-top:1px solid var(--line);
+  white-space:nowrap;
+}
+.docket dd{
+  margin:0;
+  padding:15px 0;
+  border-top:1px solid var(--line);
+  font-size:17px;
+}
+.docket dt:first-of-type, .docket dd:first-of-type{ border-top:0; padding-top:0; }
+.docket .big{
+  font-family:var(--display);
+  font-weight:500;
+  font-size:clamp(19px, 2.4vw, 24px);
+  line-height:1.15;
+  letter-spacing:-.02em;
+}
+
+/* ---------- photography ---------- */
+
+.photo-frame{ margin:0; }
+
+.photo{
+  position:relative;
+  overflow:hidden;
+  background:var(--ink-2);
+  border:1px solid var(--line);
+  margin:0;
+}
+.photo--wide{ aspect-ratio:16 / 6; margin:clamp(28px, 4vw, 44px) 0 0; }
+.photo--portrait{ aspect-ratio:4 / 5; }
+
+/* full-bleed banner — sits directly in .band, not .wrap, so it runs edge
+   to edge. Fixed viewport-relative height rather than aspect-ratio. */
+.photo--hero{ aspect-ratio:auto; height:clamp(420px, 78vh, 820px); }
+
+.photo img{
+  display:block;
+  width:100%; height:100%;
+  object-fit:cover;
+  /* pulls any photo toward the palette: desaturated, dimmed, low-light */
+  filter:grayscale(1) contrast(1.08) brightness(.74);
+}
+
+/* the img is rendered 130% tall so JS can translate it within the
+   overflow:hidden box for the parallax drift without ever showing a gap */
+.photo.photo--hero img{
+  height:130%;
+  transform:translateY(-15%);
+  will-change:transform;
+}
+
+/* warm cast, so the photo sits in the same room as everything else */
+.photo::after{
+  content:"";
+  position:absolute; inset:0; z-index:2;
+  background:
+    linear-gradient(180deg, rgba(199,154,79,.32) 0%, rgba(14,20,32,.28) 55%, rgba(14,20,32,.70) 100%),
+    radial-gradient(120% 90% at 50% 38%, rgba(232,197,131,.18), transparent 62%);
+  mix-blend-mode:soft-light;
+  pointer-events:none;
+}
+/* vignette */
+.photo::before{
+  content:"";
+  position:absolute; inset:0; z-index:3;
+  box-shadow:inset 0 0 90px 22px rgba(14,20,32,.5);
+  pointer-events:none;
+}
+
+/* visible only while the slot is empty — delete with the div once shot */
+.photo-empty{
+  position:absolute; inset:12px; z-index:4;
+  display:grid; place-content:center; align-content:center;
+  gap:9px; text-align:center; padding:20px;
+  border:1px dashed #3A4356;
+}
+.photo-empty span{
+  font-family:var(--mono);
+  font-size:10.5px; letter-spacing:.18em; text-transform:uppercase;
+  color:var(--brass);
+}
+.photo-empty p{
+  margin:0; font-size:14px; line-height:1.5; color:var(--muted); max-width:36ch;
+}
+
+.credit{
+  font-family:var(--mono);
+  font-size:10.5px; letter-spacing:.1em;
+  color:var(--muted);
+  margin-top:10px;
+}
+
+.split{
+  display:grid;
+  grid-template-columns:1fr .8fr;
+  gap:clamp(32px, 5vw, 72px);
+  align-items:center;
+}
+.split .lede{ max-width:46ch; }
+
+/* ---------- founders ---------- */
+
+.founders-carousel{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:clamp(10px, 2vw, 24px);
+  margin-top:44px;
+}
+
+.founders-swiper{
+  flex:1 1 auto;
+  max-width:900px;
+  padding:20px 0; /* room for the active card's scale(1) to not clip */
+}
+
+.founder-slide{
+  width:min(360px, 78vw);
+  height:auto;
+  align-self:center; /* swiper vertically centres slides of differing height */
+}
+
+/* Styling lives on this inner element, never on .swiper-slide itself —
+   Swiper drives that element's own transform for position/loop, so a
+   competing CSS transform here would fight it. */
+.founder{
+  padding:28px 30px 30px;
+  background:var(--ink-2);
+  border:1px solid var(--line);
+  border-top:2px solid var(--brass);
+  cursor:pointer;
+  opacity:0;
+  transform:scale(.62);
+  pointer-events:none;
+  transition:transform .5s cubic-bezier(.22,1,.36,1), opacity .5s ease;
+}
+.swiper-slide-active .founder{ opacity:1; transform:scale(1); cursor:default; pointer-events:auto; }
+.swiper-slide-prev .founder, .swiper-slide-next .founder{ opacity:.4; transform:scale(.76); pointer-events:auto; }
+
+/* no Swiper loaded — plain static row, nothing to click-to-activate */
+.founders-carousel.no-swiper .founders-swiper{ overflow:visible; max-width:none; padding:0; }
+.founders-carousel.no-swiper .swiper-wrapper{
+  display:grid; grid-template-columns:repeat(4, 1fr);
+  gap:clamp(22px, 3vw, 36px);
+  transform:none;
+}
+.founders-carousel.no-swiper .founder-slide{ width:auto; }
+.founders-carousel.no-swiper .founder{
+  opacity:1; transform:none; pointer-events:none; cursor:default;
+}
+.founders-carousel.no-swiper .carousel-btn{ display:none; }
+
+/* echoes a filled seat from the table */
+.founder-mark{
+  width:84px; height:84px;
+  border-radius:50%;
+  background:var(--ink);
+  border:1.6px solid var(--brass);
+  display:grid; place-items:center;
+  overflow:hidden;
+  font-family:var(--mono);
+  font-size:13px;
+  letter-spacing:.06em;
+  color:var(--brass-lit);
+  margin-bottom:20px;
+}
+.founder-mark img{
+  width:100%; height:100%;
+  object-fit:cover;
+  /* same desaturated, warm-lit treatment as the site's other photography */
+  filter:grayscale(1) contrast(1.08) brightness(.9) sepia(.25);
+}
+.founder h4{
+  font-family:var(--display);
+  font-weight:500;
+  font-size:26px;
+  line-height:1.2;
+  letter-spacing:-.018em;
+  margin:0 0 8px;
+}
+.founder .role{
+  font-family:var(--mono);
+  font-size:11px;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:var(--brass);
+  margin:0 0 14px;
+}
+
+.founder p.bio{
+  margin:0 0 16px;
+  font-size:16px;
+  line-height:1.55;
+  color:var(--muted);
+}
+
+.founder a.li{
+  font-family:var(--mono);
+  font-size:11px;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:var(--bone);
+  text-decoration:none;
+  border-bottom:1px solid var(--line);
+  padding-bottom:3px;
+  transition:border-color .2s ease, color .2s ease;
+}
+.founder a.li:hover{ color:var(--brass-lit); border-bottom-color:var(--brass); }
+
+.carousel-btn{
+  position:relative;
+  z-index:10;
+  flex:0 0 auto;
+  width:44px; height:44px;
+  border-radius:50%;
+  border:1px solid var(--line);
+  background:transparent;
+  color:var(--bone);
+  font-family:var(--body);
+  font-size:22px;
+  line-height:1;
+  cursor:pointer;
+  display:grid; place-items:center;
+  transition:border-color .2s ease, color .2s ease, transform .2s ease;
+}
+.carousel-btn:hover{ border-color:var(--brass); color:var(--brass-lit); }
+.carousel-btn--prev:hover{ transform:translateX(-2px); }
+.carousel-btn--next:hover{ transform:translateX(2px); }
+
+/* ---------- steps ---------- */
+
+.step-num{
+  font-family:var(--mono);
+  font-size:12px;
+  letter-spacing:.14em;
+  color:var(--brass);
+  display:block;
+  padding-bottom:14px;
+  margin-bottom:16px;
+  border-bottom:1px solid var(--line);
+}
+.step h4{
+  font-family:var(--display);
+  font-weight:500;
+  font-size:24px;
+  line-height:1.18;
+  letter-spacing:-.018em;
+  margin:0 0 10px;
+}
+.step p{ margin:0; color:var(--muted); font-size:15.5px; line-height:1.55; }
+
+/* ---------- steps: scroll-driven card deck (mwg_effect042) ---------- */
+
+.mwg_effect042{ border-top:1px solid var(--line); position:relative; }
+
+.mwg_effect042 .pin-height{ height:280vh; }
+
+.mwg_effect042 .container{
+  height:100vh;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:clamp(32px, 5vw, 56px);
+  text-align:center;
+}
+
+.mwg_effect042 .steps-head .eyebrow{ margin-bottom:18px; }
+.mwg_effect042 .steps-head .band-title{ margin:0; font-size:clamp(46px, 9vw, 96px); }
+
+.mwg_effect042 .medias{
+  position:relative;
+  width:min(460px, 82vw);
+  height:clamp(300px, 34vw, 380px);
+  perspective:26vw;
+  transform-style:preserve-3d;
+}
+
+.mwg_effect042 .media{
+  position:absolute;
+  inset:0;
+  display:flex;
+  flex-direction:column;
+  justify-content:flex-start;
+  text-align:left;
+  padding:clamp(28px, 4vw, 40px);
+  background:var(--ink-2);
+  border:1px solid var(--line);
+  border-top:2px solid var(--brass);
+  box-shadow:0 30px 60px -30px rgba(0,0,0,.6);
+}
+.mwg_effect042 .media .step-num,
+.mwg_effect042 .media h4,
+.mwg_effect042 .media p{ margin-top:0; }
+
+/* no GSAP/ScrollTrigger loaded, or prefers-reduced-motion — plain 3-up grid */
+.mwg_effect042.no-motion .pin-height{ height:auto; }
+.mwg_effect042.no-motion .container{
+  height:auto;
+  display:block;
+  text-align:left;
+  padding-block:clamp(64px, 10vw, 118px);
+}
+.mwg_effect042.no-motion .steps-head{
+  position:static; left:auto; bottom:auto; transform:none;
+  margin-bottom:44px;
+}
+.mwg_effect042.no-motion .medias{
+  position:static;
+  transform:none;
+  width:100%;
+  height:auto;
+  perspective:none;
+  display:grid;
+  grid-template-columns:repeat(3, 1fr);
+  gap:clamp(24px, 4vw, 48px);
+}
+.mwg_effect042.no-motion .media{ position:static; inset:auto; box-shadow:none; }
+/* DOM order is 03,02,01 (see markup comment) — re-sort the grid back to
+   reading order since `order` works on grid items, unlike absolute ones */
+.mwg_effect042.no-motion .media:nth-child(1){ order:3; }
+.mwg_effect042.no-motion .media:nth-child(2){ order:2; }
+.mwg_effect042.no-motion .media:nth-child(3){ order:1; }
+
+/* ---------- request form ---------- */
+
+.request{ background:var(--ink-2); }
+
+.request-grid{
+  display:grid;
+  grid-template-columns:.8fr 1fr;
+  gap:clamp(32px, 5vw, 72px);
+  align-items:start;
+}
+.request-intro .lede{ margin-top:14px; }
+
+.form-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:20px;
+  max-width:680px;
+}
+.field{ display:flex; flex-direction:column; gap:8px; }
+.field.full{ grid-column:1 / -1; }
+.field label{
+  font-family:var(--mono);
+  font-size:10.5px;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  color:var(--muted);
+}
+.field input, .field textarea{
+  font-family:var(--body);
+  font-size:16px;
+  color:var(--bone);
+  background:transparent;
+  border:0;
+  border-bottom:1px solid var(--line);
+  padding:9px 0;
+  transition:border-color .2s ease;
+}
+.field input:focus, .field textarea:focus{
+  outline:none;
+  border-bottom-color:var(--brass);
+}
+.field textarea{ resize:vertical; min-height:72px; }
+
+.form-actions{
+  grid-column:1 / -1;
+  display:flex; align-items:center; gap:20px; flex-wrap:wrap;
+  margin-top:8px;
+}
+.form-note{ font-size:13.5px; color:var(--muted); margin:0; }
+
+.done{
+  display:none;
+  margin-top:36px;
+  max-width:680px;
+  border:1px solid var(--brass);
+  border-left:3px solid var(--brass);
+  padding:24px 26px;
+  background:rgba(199,154,79,.06);
+}
+.done h3{ font-family:var(--display); font-weight:500; font-size:28px; letter-spacing:-.02em; margin:0 0 8px; }
+.done p{ margin:0; color:var(--muted); font-size:15.5px; }
+.is-sent .form-grid{ display:none; }
+.is-sent .done{ display:block; }
+
+/* ---------- footer ---------- */
+
+.foot{
+  border-top:1px solid var(--line);
+  padding:44px var(--gutter);
+  display:flex; justify-content:space-between; gap:22px; flex-wrap:wrap;
+  font-family:var(--mono);
+  font-size:11.5px;
+  letter-spacing:.06em;
+  color:var(--muted);
+}
+.foot a{ color:var(--bone); text-decoration:none; border-bottom:1px solid var(--line); }
+.foot a:hover{ border-bottom-color:var(--brass); }
+
+/* ---------- responsive ---------- */
+
+@media (max-width:760px){
+  .ledger, .form-grid{ grid-template-columns:1fr; }
+  .request-grid, .docket-grid{ grid-template-columns:1fr; gap:32px; }
+  .photo--hero{ height:clamp(320px, 58vh, 520px); }
+  .founders-carousel{ gap:8px; }
+  .founder-slide{ width:min(280px, 68vw); }
+  .founder{ padding:24px 22px 26px; }
+  .founders-carousel.no-swiper .swiper-wrapper{ grid-template-columns:1fr; gap:28px; }
+  .carousel-btn{ width:36px; height:36px; font-size:18px; }
+  .split{ grid-template-columns:1fr; gap:32px; }
+  .split .lede{ max-width:56ch; }
+  .ledger{ gap:36px; }
+  .docket dl{ grid-template-columns:1fr; gap:0; }
+  .docket dd{ border-top:0; padding-top:0; padding-bottom:18px; }
+  .docket dt{ padding-bottom:6px; }
+  .docket dt:first-of-type{ padding-top:0; }
+  .seal{ display:none; }
+  .mwg_effect042 .pin-height{ height:340vh; }
+  .mwg_effect042.no-motion .medias{ grid-template-columns:1fr; gap:32px; }
+}
+
+/* ---------- motion ---------- */
+
+@keyframes lampUp{ from{ opacity:0 } to{ opacity:1 } }
+@keyframes seatIn{ from{ opacity:0; transform:scale(.55) } to{ opacity:1; transform:scale(1) } }
+@keyframes breathe{ 0%,100%{ opacity:.45 } 50%{ opacity:1 } }
+@keyframes riseIn{ from{ opacity:0; transform:translateY(14px) } to{ opacity:1; transform:translateY(0) } }
+
+.lamp{ animation:lampUp 1.5s ease .15s both; }
+.tabletop{ animation:riseIn .9s cubic-bezier(.22,1,.36,1) .25s both; }
+.seat{ transform-box:fill-box; transform-origin:center; animation:seatIn .5s cubic-bezier(.34,1.4,.64,1) both; }
+.seat--open .seat-ring{ animation:breathe 2.8s ease-in-out infinite; }
+
+.rise{ animation:riseIn .8s cubic-bezier(.22,1,.36,1) both; }
+.rise-1{ animation-delay:.05s } .rise-2{ animation-delay:.16s } .rise-3{ animation-delay:.28s }
+
+/* scroll reveal for everything below the hero — degrades to fully visible with no JS */
+.js-reveal .reveal{
+  opacity:0; transform:translateY(16px);
+  transition:opacity .7s cubic-bezier(.22,1,.36,1), transform .7s cubic-bezier(.22,1,.36,1);
+}
+.js-reveal .reveal.is-visible{ opacity:1; transform:translateY(0); }
+
+/* text-reveal masks (GSAP SplitText) — the mask clips, the word/line
+   inside it is what actually translates up into view. If the library
+   never loads, none of these classes ever get added and text just
+   reads normally. */
+.reveal-mask-word{ display:inline-block; overflow:hidden; vertical-align:top; }
+.reveal-mask-line{ display:block; overflow:hidden; }
+
+@media (prefers-reduced-motion:reduce){
+  html{ scroll-behavior:auto; }
+  *,*::before,*::after{ animation:none !important; transition:none !important; }
+  .seat--open .seat-ring{ opacity:1; }
+}
+</style>
+</head>
+<body>
+<script>document.documentElement.className += ' js-reveal';</script>
+<div class="grain" aria-hidden="true"></div>
+
+<header class="topbar">
+  <a class="wordmark" href="#top">MCR Agency <span>Collective</span></a>
+  <span class="seal">By invitation</span>
+</header>
+
+<main id="top">
+
+  <!-- ============ HERO + THE TABLE ============ -->
+  <section class="hero wrap">
+    <p class="eyebrow rise rise-1">Manchester &nbsp;·&nbsp; Quarterly &nbsp;·&nbsp; Twelve to fourteen people</p>
+    <h1 class="rise rise-2">A private room, a long table, and <em>nobody selling anything</em>.</h1>
+    <p class="hero-sub rise rise-3">Dinner for agency founders and senior decision-makers, four times a year. Everyone at the table runs an agency. That's the whole idea.</p>
+
+    <figure class="table-figure">
+      <!-- SEATS: filled = class "seat", open = class "seat seat--open". Change the mix to match reality. -->
+      <svg viewBox="0 0 900 420" role="img" aria-labelledby="tableTitle tableDesc">
+        <title id="tableTitle">The dinner table</title>
+        <desc id="tableDesc">A long private dining table seen from above with fourteen seats, three of which are still open.</desc>
+
+        <defs>
+          <radialGradient id="lampGlow" cx="50%" cy="50%" r="50%">
+            <stop offset="0%"   stop-color="#E8C583" stop-opacity=".30"/>
+            <stop offset="45%"  stop-color="#C79A4F" stop-opacity=".11"/>
+            <stop offset="100%" stop-color="#C79A4F" stop-opacity="0"/>
+          </radialGradient>
+          <linearGradient id="cloth" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#1B2434"/>
+            <stop offset="100%" stop-color="#141C29"/>
+          </linearGradient>
+        </defs>
+
+        <!-- pendant light over the table -->
+        <ellipse class="lamp" cx="450" cy="210" rx="410" ry="250" fill="url(#lampGlow)"/>
+
+        <!-- the table -->
+        <g class="tabletop">
+          <rect x="190" y="140" width="520" height="140" rx="70" fill="url(#cloth)" stroke="#2E3A50" stroke-width="1.5"/>
+          <rect x="206" y="156" width="488" height="108" rx="54" fill="none" stroke="#C79A4F" stroke-width="1" stroke-opacity=".22"/>
+        </g>
+
+        <!-- seats: top row -->
+        <g class="seat"            style="animation-delay:.55s"><circle class="seat-ring" cx="240" cy="112" r="17" fill="#151D2C" stroke="#C79A4F" stroke-width="1.6"/></g>
+        <g class="seat"            style="animation-delay:.62s"><circle class="seat-ring" cx="324" cy="112" r="17" fill="#151D2C" stroke="#C79A4F" stroke-width="1.6"/></g>
+        <g class="seat"            style="animation-delay:.69s"><circle class="seat-ring" cx="408" cy="112" r="17" fill="#151D2C" stroke="#C79A4F" stroke-width="1.6"/></g>
+        <g class="seat seat--open" style="animation-delay:.76s"><circle class="seat-ring" cx="492" cy="112" r="17" fill="none" stroke="#E8C583" stroke-width="1.4" stroke-dasharray="4 5"/></g>
+        <g class="seat"            style="animation-delay:.83s"><circle class="seat-ring" cx="576" cy="112" r="17" fill="#151D2C" stroke="#C79A4F" stroke-width="1.6"/></g>
+        <g class="seat"            style="animation-delay:.90s"><circle class="seat-ring" cx="660" cy="112" r="17" fill="#151D2C" stroke="#C79A4F" stroke-width="1.6"/></g>
+
+        <!-- seats: bottom row -->
+        <g class="seat"            style="animation-delay:.97s"><circle class="seat-ring" cx="240" cy="308" r="17" fill="#151D2C" stroke="#C79A4F" stroke-width="1.6"/></g>
+        <g class="seat seat--open" style="animation-delay:1.04s"><circle class="seat-ring" cx="324" cy="308" r="17" fill="none" stroke="#E8C583" stroke-width="1.4" stroke-dasharray="4 5"/></g>
+        <g class="seat"            style="animation-delay:1.11s"><circle class="seat-ring" cx="408" cy="308" r="17" fill="#151D2C" stroke="#C79A4F" stroke-width="1.6"/></g>
+        <g class="seat"            style="animation-delay:1.18s"><circle class="seat-ring" cx="492" cy="308" r="17" fill="#151D2C" stroke="#C79A4F" stroke-width="1.6"/></g>
+        <g class="seat"            style="animation-delay:1.25s"><circle class="seat-ring" cx="576" cy="308" r="17" fill="#151D2C" stroke="#C79A4F" stroke-width="1.6"/></g>
+        <g class="seat"            style="animation-delay:1.32s"><circle class="seat-ring" cx="660" cy="308" r="17" fill="#151D2C" stroke="#C79A4F" stroke-width="1.6"/></g>
+
+        <!-- heads of the table -->
+        <g class="seat"            style="animation-delay:1.39s"><circle class="seat-ring" cx="152" cy="210" r="17" fill="#151D2C" stroke="#C79A4F" stroke-width="1.6"/></g>
+        <g class="seat seat--open" style="animation-delay:1.46s"><circle class="seat-ring" cx="748" cy="210" r="17" fill="none" stroke="#E8C583" stroke-width="1.4" stroke-dasharray="4 5"/></g>
+      </svg>
+      <figcaption class="seat-count"><b>Three seats open</b> for 24 September</figcaption>
+    </figure>
+
+    <div class="hero-cta">
+      <a class="btn" href="#request">Ask for a seat</a>
+    </div>
+  </section>
+
+  <!-- ============ WHAT IT IS / ISN'T ============ -->
+  <section class="band wrap">
+    <p class="eyebrow">01 — The short version</p>
+    <h2 class="band-title">Most agency dinners are organised by someone who wants to sell to the room.</h2>
+    <p class="lede">This one isn't. Four agency owners set it up because we wanted the version of this that nobody was running.</p>
+
+    <div class="ledger reveal">
+      <div class="col-is">
+        <h3>What it is</h3>
+        <ul>
+          <li>Agency founders and senior decision-makers, four times a year</li>
+          <li>A private dining room, booked just for us</li>
+          <li>Honest conversation with people running the same kind of business</li>
+          <li>Collaboration and referrals, if they happen on their own</li>
+          <li>A small group that stays small</li>
+        </ul>
+      </div>
+      <div class="col-isnt">
+        <h3>What it isn't</h3>
+        <ul>
+          <li><span>A supplier event dressed up as a dinner</span></li>
+          <li><span>A pitch, a panel or a deck</span></li>
+          <li><span>Salespeople and business development teams</span></li>
+          <li><span>An open community you can simply join</span></li>
+          <li><span>Someone else picking up the bill</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ DOCKET: the first dinner ============ -->
+  <section class="band dinner-band">
+    <figure class="photo-frame">
+      <div class="photo photo--hero" data-parallax>
+        <img src="images/table-spread.jpg" alt="A shared table seen from above, mid-meal, with hands reaching in over the plates">
+      </div>
+    </figure>
+
+    <div class="wrap">
+      <div class="docket-grid">
+        <div class="dinner-intro reveal">
+          <p class="eyebrow">02 — Next dinner</p>
+          <h2 class="band-title">The first one</h2>
+          <p class="lede">Everything you need to know before you say yes.</p>
+        </div>
+
+        <div class="docket reveal">
+          <dl>
+            <dt>When</dt>
+            <dd class="big">Thursday 24 September 2026, 7pm</dd>
+
+            <dt>Where</dt>
+            <dd>Manchester city centre. Private dining room, shared with the group once you're in.</dd>
+
+            <dt>Cost</dt>
+            <dd>Nothing to attend. Everyone covers their own food and drinks on the night.</dd>
+
+            <dt>Table</dt>
+            <dd>Twelve to fourteen people. We'd rather turn someone away than make it a function room.</dd>
+
+            <dt>After</dt>
+            <dd>A WhatsApp group. Quiet between dinners, useful when it isn't.</dd>
+          </dl>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ WHO'S AT THE TABLE ============ -->
+  <section class="band wrap">
+    <div class="split reveal">
+      <div>
+        <p class="eyebrow">03 — Who's at the table</p>
+        <h2 class="band-title">Founders, MDs and partners. Nobody's deputy.</h2>
+        <p class="lede">Creative, marketing, digital, brand and PR agencies — independents rather than network offices. Mostly Manchester and the North West, occasionally further if the fit is right. We watch the mix so the room doesn't end up as twelve people who all do the same thing and can't say anything in front of each other.</p>
+      </div>
+
+      <!-- PHOTO SLOT — portrait.
+           Drop the image in and delete the .photo-empty div:
+           <img src="images/group.jpg" alt="Agency owners in conversation around the table">
+      -->
+      <figure class="photo-frame">
+        <div class="photo photo--portrait">
+          <img src="images/dinner-crowd.jpg" alt="Agency owners mid-conversation over dinner, not looking at the camera">
+        </div>
+        <figcaption class="credit">No decks. No pitches. Just conversation.</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- ============ WHO SET IT UP ============ -->
+  <section class="band wrap">
+    <p class="eyebrow">04 — Who set it up</p>
+    <h2 class="band-title">Four agency owners, one shared complaint</h2>
+    <p class="lede">We each got tired of the same evening: a room full of people being sold to, badged as networking. So we booked a table instead.</p>
+
+    <!-- Swiper carousel. Degrades to a plain 4-up grid (.no-swiper) if the
+         CDN script fails to load — see the init script near </body>. -->
+    <div class="founders-carousel reveal" data-carousel aria-roledescription="carousel">
+      <button type="button" class="carousel-btn carousel-btn--prev" aria-label="Previous founder">‹</button>
+
+      <div class="swiper founders-swiper">
+        <div class="swiper-wrapper">
+
+          <div class="swiper-slide founder-slide">
+            <div class="founder">
+              <div class="founder-mark"><img src="images/adam-jacobson.jpg" alt="Adam Jacobson"></div>
+              <h4>Adam Jacobson</h4>
+              <p class="role">Co-Founder, SDMG &amp; PRPS Agency</p>
+              <p class="bio">Co-founded two of them: SDMG for brand aesthetics, PRPS for purpose-led creative. Started the conversation that turned into this group.</p>
+              <a class="li" href="https://www.linkedin.com/in/adamijacobson/" target="_blank" rel="noopener">LinkedIn</a>
+            </div>
+          </div>
+
+          <div class="swiper-slide founder-slide">
+            <div class="founder">
+              <div class="founder-mark"><img src="images/daniel-cordwell.jpg" alt="Daniel Cordwell"></div>
+              <h4>Daniel Cordwell</h4>
+              <p class="role">CEO &amp; Founder, Visions</p>
+              <p class="bio">Runs a Manchester creative digital agency, building bespoke digital and design work for brands that would rather not blend in.</p>
+              <a class="li" href="https://www.linkedin.com/in/danielcordwell/" target="_blank" rel="noopener">LinkedIn</a>
+            </div>
+          </div>
+
+          <div class="swiper-slide founder-slide">
+            <div class="founder">
+              <div class="founder-mark"><img src="images/jennifer-kennedy.jpg" alt="Jennifer Kennedy"></div>
+              <h4>Jennifer Kennedy</h4>
+              <p class="role">Co-Owner &amp; MD, Cuckoo Design</p>
+              <p class="bio">Twenty-five years in property marketing at a Manchester specialist. Belfast originally, and an honorary Manc by her own reckoning.</p>
+              <a class="li" href="https://www.linkedin.com/in/jennifer-kennedy-cuckoo/" target="_blank" rel="noopener">LinkedIn</a>
+            </div>
+          </div>
+
+          <div class="swiper-slide founder-slide">
+            <div class="founder">
+              <div class="founder-mark"><img src="images/mariam-aslam-digger.jpg" alt="Mariam Aslam-Digger"></div>
+              <h4>Mariam Aslam-Digger</h4>
+              <p class="role">Managing Director, Tonic&amp;Co</p>
+              <p class="bio">Ten years on both sides of the table, client and agency, across automotive, retail, hospitality and property. Strategy that has to pay for itself.</p>
+              <a class="li" href="https://www.linkedin.com/in/mariam-aslam-digger/" target="_blank" rel="noopener">LinkedIn</a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <button type="button" class="carousel-btn carousel-btn--next" aria-label="Next founder">›</button>
+    </div>
+  </section>
+
+  <!-- ============ HOW YOU GET A SEAT ============ -->
+  <!-- Scroll-driven card deck. Degrades to a plain 3-up grid (.no-motion) with
+       no JS, a blocked/slow CDN, or prefers-reduced-motion — see the script
+       near the closing </body> tag. -->
+  <section class="mwg_effect042">
+    <div class="pin-height">
+      <div class="container wrap">
+        <div class="steps-head">
+          <p class="eyebrow">05 — How a seat happens</p>
+          <h2 class="band-title">Three steps, in order</h2>
+        </div>
+
+        <!-- DOM order here is the deck's rest/at-scroll-zero order, not
+             reading order: the LAST card in this list is the one that
+             sits on top before any scrolling happens (03 was there
+             originally, showing "You're in the group" first — swapped
+             with 01 below so the deck opens on the right step). The
+             .no-motion fallback grid re-sorts back to reading order via
+             the `order` rule right below this block. -->
+        <div class="medias">
+          <div class="media step">
+            <span class="step-num">03</span>
+            <h4>You're in the group</h4>
+            <p>We add you to the WhatsApp group, share the venue, and you turn up. Recommendations for other agency owners are always welcome.</p>
+          </div>
+          <div class="media step">
+            <span class="step-num">02</span>
+            <h4>We look at the mix</h4>
+            <p>Not a test. We're only checking the room stays balanced and there's no awkward overlap with someone already at the table.</p>
+          </div>
+          <div class="media step">
+            <span class="step-num">01</span>
+            <h4>Someone puts your name forward</h4>
+            <p>Every seat starts with an introduction. If you're reading this, that part has probably already happened.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ REQUEST ============ -->
+  <section class="band request" id="request">
+    <div class="wrap">
+      <div class="request-grid">
+        <div class="request-intro">
+          <p class="eyebrow">06 — Request</p>
+          <h2 class="band-title">Ask for a seat</h2>
+          <p class="lede">Tell us who you are. If it's a yes, you'll be in the WhatsApp group the same week.</p>
+        </div>
+
+      <form id="seatForm" novalidate>
+        <div class="form-grid">
+          <div class="field">
+            <label for="f-name">Your name</label>
+            <input id="f-name" name="name" type="text" autocomplete="name" required>
+          </div>
+          <div class="field">
+            <label for="f-agency">Agency</label>
+            <input id="f-agency" name="agency" type="text" autocomplete="organization" required>
+          </div>
+          <div class="field">
+            <label for="f-role">Your role</label>
+            <input id="f-role" name="role" type="text" autocomplete="organization-title" required>
+          </div>
+          <div class="field">
+            <label for="f-email">Email</label>
+            <input id="f-email" name="email" type="email" autocomplete="email" required>
+          </div>
+          <div class="field full">
+            <label for="f-note">Who recommended you, and anything else worth knowing <span style="text-transform:none;letter-spacing:0">(optional)</span></label>
+            <textarea id="f-note" name="note" rows="3"></textarea>
+          </div>
+          <div class="form-actions">
+            <button class="btn" type="submit">Send request</button>
+            <p class="form-note">We'll reply either way. No list, no newsletter, no follow-up sequence.</p>
+          </div>
+        </div>
+
+        <div class="done" role="status" aria-live="polite">
+          <h3>Request sent</h3>
+          <p>One of us will come back to you before 24 September. If it's a yes, you'll get the WhatsApp invite and the venue.</p>
+        </div>
+      </form>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="foot">
+  <span>MCR Agency Collective — Manchester</span>
+  <span>Set up by four agency owners</span>
+  <a href="#top">Back to top ↑</a>
+</footer>
+
+<!-- Steps card-deck effect. Loaded from CDN — if any of these three fail
+     (offline, blocked, ad-blocker), the fallback check in the script below
+     drops the section into a plain static grid instead of breaking. -->
+<script src="https://unpkg.com/gsap@3/dist/gsap.min.js"></script>
+<script src="https://unpkg.com/gsap@3/dist/ScrollTrigger.min.js"></script>
+<script src="https://unpkg.com/gsap@3/dist/SplitText.min.js"></script>
+<script src="https://unpkg.com/lenis@1/dist/lenis.min.js"></script>
+
+<!-- Founders carousel. Falls back to a plain 4-up grid (.no-swiper class,
+     added below) if this fails to load. -->
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+<script>
+(function(){
+  var form = document.getElementById('seatForm');
+  if(!form) return;
+
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+
+    var required = form.querySelectorAll('[required]');
+    for(var i=0;i<required.length;i++){
+      if(!required[i].value.trim() || (required[i].type==='email' && !/^\S+@\S+\.\S+$/.test(required[i].value))){
+        required[i].focus();
+        required[i].style.borderBottomColor = '#7A2739';
+        return;
+      }
+      required[i].style.borderBottomColor = '';
+    }
+
+    /* FORM ENDPOINT ----------------------------------------------------
+       Right now this just shows the confirmation. To make it live, drop
+       your endpoint in below (Formspree, Netlify Forms, HubSpot, a Zap —
+       whatever you're already using) and uncomment:
+
+       fetch('https://YOUR-ENDPOINT-HERE', {
+         method: 'POST',
+         headers: { 'Content-Type': 'application/json' },
+         body: JSON.stringify(Object.fromEntries(new FormData(form)))
+       });
+
+       Simplest no-backend option: swap the button for a mailto link that
+       pre-fills the subject, e.g.
+       <a class="btn" href="mailto:hello@example.com?subject=Seat%20request">
+    ------------------------------------------------------------------- */
+
+    form.classList.add('is-sent');
+    form.querySelector('.done').scrollIntoView({ block:'center', behavior:'smooth' });
+  });
+})();
+
+(function(){
+  var els = document.querySelectorAll('.reveal');
+  if(!els.length) return;
+
+  if('IntersectionObserver' in window){
+    var obs = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if(entry.isIntersecting){
+          entry.target.classList.add('is-visible');
+          obs.unobserve(entry.target);
+        }
+      });
+    }, { threshold:.15, rootMargin:'0px 0px -60px 0px' });
+    els.forEach(function(el){ obs.observe(el); });
+  } else {
+    els.forEach(function(el){ el.classList.add('is-visible'); });
+  }
+})();
+
+(function(){
+  var wrappers = document.querySelectorAll('[data-parallax]');
+  if(!wrappers.length) return;
+
+  var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var strength = 15; // % of the image's own (130%-height) box — stays inside the 30% travel budget
+  var ticking = false;
+
+  function update(){
+    ticking = false;
+    var viewportH = window.innerHeight;
+    wrappers.forEach(function(wrap){
+      var img = wrap.querySelector('img');
+      if(!img) return;
+      var rect = wrap.getBoundingClientRect();
+      var elementCenter = rect.top + rect.height / 2;
+      var progress = (viewportH / 2 - elementCenter) / viewportH; // -ish 1..1 while on screen
+      progress = Math.max(-1, Math.min(1, progress));
+      img.style.transform = 'translateY(' + (-15 + progress * strength) + '%)';
+    });
+  }
+
+  function onScroll(){
+    if(!ticking){
+      ticking = true;
+      requestAnimationFrame(update);
+    }
+  }
+
+  update();
+  if(!reduceMotion){
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll);
+  }
+})();
+
+(function(){
+  // Site-wide smooth scroll. If GSAP + ScrollTrigger are also on the page
+  // (they are, for the steps section and the text reveals), Lenis is
+  // driven by GSAP's own ticker rather than its default independent RAF
+  // loop — that's the integration Lenis's own docs recommend whenever
+  // ScrollTrigger is present, so the pinned/scrubbed steps section reads
+  // scroll position that's actually in sync with what's on screen instead
+  // of racing against a second, unrelated animation loop.
+  if(typeof Lenis === 'undefined') return;
+  if(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  var lenis = new Lenis({
+    duration: 1.1,
+    easing: function(t){ return Math.min(1, 1.001 - Math.pow(2, -10 * t)); }
+  });
+
+  if(typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined'){
+    lenis.on('scroll', ScrollTrigger.update);
+    gsap.ticker.add(function(time){ lenis.raf(time * 1000); });
+    gsap.ticker.lagSmoothing(0);
+  } else {
+    requestAnimationFrame(function raf(time){
+      lenis.raf(time);
+      requestAnimationFrame(raf);
+    });
+  }
+})();
+
+(function(){
+  var root = document.querySelector('.mwg_effect042');
+  if(!root) return;
+
+  var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var hasGsap = (typeof gsap !== 'undefined') && (typeof ScrollTrigger !== 'undefined');
+
+  // No GSAP/ScrollTrigger (blocked CDN, offline, ad-blocker) or the visitor
+  // asked for reduced motion — fall back to a plain static grid, no pin.
+  if(reduceMotion || !hasGsap){
+    root.classList.add('no-motion');
+    return;
+  }
+
+  gsap.registerPlugin(ScrollTrigger);
+  // Site-wide Lenis smooth scroll is set up separately, synced to GSAP's
+  // ticker — see the dedicated block near the end of this script. It's
+  // shared by the whole page rather than local to this section.
+
+  var pinHeight = root.querySelector('.pin-height');
+  var container = root.querySelector('.container');
+
+  ScrollTrigger.create({
+    trigger: pinHeight,
+    start: 'top top',
+    end: 'bottom bottom',
+    pin: container
+  });
+
+  var gap = 30;
+  var medias = root.querySelectorAll('.media');
+  var distPerMedia = (pinHeight.clientHeight - window.innerHeight) / medias.length;
+
+  gsap.set(medias, {
+    y: gap * (medias.length - 1),
+    z: -gap * (medias.length - 1)
+  });
+
+  medias.forEach(function(media, index){
+    var tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: pinHeight,
+        start: 'top top+=' + (distPerMedia * index),
+        end: 'bottom bottom+=' + (distPerMedia * index),
+        scrub: 0.5
+      }
+    });
+
+    for(var i = 0; i < medias.length - 1; i++){
+      tl.to(media, {
+        y: '-=' + gap,
+        z: '+=' + gap,
+        ease: 'back.inOut(3)'
+      });
+    }
+
+    tl.to(media, {
+      yPercent: -80,
+      y: '-50vh',
+      scale: 1.2,
+      rotation: (Math.random() - 0.5) * 50,
+      ease: 'power4.in'
+    });
+  });
+})();
+
+(function(){
+  var carousel = document.querySelector('[data-carousel]');
+  if(!carousel) return;
+
+  if(typeof Swiper === 'undefined'){
+    carousel.classList.add('no-swiper');
+    return;
+  }
+
+  new Swiper(carousel.querySelector('.founders-swiper'), {
+    loop: true,
+    centeredSlides: true,
+    slidesPerView: 'auto',
+    spaceBetween: 24,
+    speed: 500,
+    slideToClickedSlide: true,
+    keyboard: { enabled: true },
+    navigation: {
+      nextEl: carousel.querySelector('.carousel-btn--next'),
+      prevEl: carousel.querySelector('.carousel-btn--prev')
+    }
+  });
+})();
+
+(function(){
+  // Masked, word/line-staggered scroll reveal for headings and body copy.
+  // Requires GSAP + ScrollTrigger + SplitText — if any are missing, or the
+  // visitor asked for reduced motion, this simply never runs and every
+  // heading/paragraph just reads normally (nothing is hidden by default
+  // CSS, so there's no broken/invisible state to fall back from).
+  if(typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined' || typeof SplitText === 'undefined') return;
+  if(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  gsap.registerPlugin(ScrollTrigger, SplitText);
+
+  var GROUPS = [
+    // Section titles below the fold — the hero's own h1 already has its
+    // own load-in animation, so it's deliberately excluded here.
+    { selector: 'h2.band-title', type: 'words', stagger: 0.045 },
+    // Intro/body paragraphs.
+    { selector: '.lede', type: 'lines', stagger: 0.1 }
+  ];
+
+  var entries = [];
+
+  function isEligible(el){
+    // Anything inside the founders carousel gets cloned by Swiper for its
+    // loop — a clone would inherit an already-hidden inline state with no
+    // ScrollTrigger of its own ever pointed at it, i.e. permanently
+    // invisible text. Simplest safe fix: skip that whole region.
+    return !el.closest('.founders-carousel');
+  }
+
+  function makeReveal(el, type, stagger){
+    var split = new SplitText(el, { type: type });
+    var targets = type === 'words' ? split.words : split.lines;
+    if(!targets.length) return null;
+
+    var maskClass = type === 'words' ? 'reveal-mask-word' : 'reveal-mask-line';
+    targets.forEach(function(t){
+      var mask = document.createElement('span');
+      mask.className = maskClass;
+      t.parentNode.insertBefore(mask, t);
+      mask.appendChild(t);
+    });
+
+    gsap.set(targets, { yPercent: 110 });
+
+    var entry = { el: el, done: false, split: split };
+
+    entry.st = ScrollTrigger.create({
+      trigger: el,
+      start: 'top 88%',
+      once: true,
+      onEnter: function(){
+        gsap.to(targets, {
+          yPercent: 0,
+          duration: 0.85,
+          ease: 'power3.out',
+          stagger: stagger,
+          onComplete: function(){
+            // Reveal's done — collapse back to the plain original markup.
+            // Nothing left to animate, and it's now immune to resize.
+            split.revert();
+            entry.done = true;
+          }
+        });
+      }
+    });
+
+    return entry;
+  }
+
+  function collect(){
+    GROUPS.forEach(function(group){
+      document.querySelectorAll(group.selector).forEach(function(el){
+        if(!isEligible(el)) return;
+        if(entries.some(function(e){ return e.el === el; })) return;
+        var entry = makeReveal(el, group.type, group.stagger);
+        if(entry) entries.push(entry);
+      });
+    });
+  }
+
+  collect();
+
+  // Line-splits are width-dependent — a viewport resize before a paragraph
+  // has revealed can leave stale line breaks. Only touch the ones still
+  // pending; anything already revealed was reverted back to plain text
+  // above and no longer needs to care about resize at all.
+  var resizeTimer;
+  window.addEventListener('resize', function(){
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(function(){
+      entries = entries.filter(function(entry){
+        if(entry.done) return true;
+        entry.st.kill();
+        entry.split.revert();
+        return false;
+      });
+      collect();
+      ScrollTrigger.refresh();
+    }, 200);
+  });
+})();
+</script>
+
+</body>
+</html>
