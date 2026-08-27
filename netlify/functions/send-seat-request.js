@@ -34,7 +34,10 @@ exports.handler = async function (event) {
   // the part the visitor's confirmation actually depends on.
   if (process.env.SUPABASE_URL && process.env.SUPABASE_SERVICE_ROLE_KEY) {
     try {
-      var supabaseRes = await fetch(process.env.SUPABASE_URL + '/rest/v1/seat_requests', {
+      // Accept either a bare project URL or one that already has /rest/v1
+      // (with or without a trailing slash) tacked on.
+      var supabaseBase = process.env.SUPABASE_URL.trim().replace(/\/rest\/v1\/?$/, '').replace(/\/+$/, '');
+      var supabaseRes = await fetch(supabaseBase + '/rest/v1/seat_requests', {
         method: 'POST',
         headers: {
           apikey: process.env.SUPABASE_SERVICE_ROLE_KEY,
