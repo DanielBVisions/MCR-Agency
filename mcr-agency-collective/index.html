@@ -990,8 +990,8 @@ a{ color:inherit; }
             <div class="founder">
               <div class="founder-mark"><img src="images/mariam-aslam-digger.jpg" alt="Mariam Aslam-Digger"></div>
               <h4>Mariam Aslam-Digger</h4>
-              <p class="role">Managing Director, Tonic&amp;Co</p>
-              <p class="bio">Ten years on both sides of the table, client and agency, across automotive, retail, hospitality and property. Strategy that has to pay for itself.</p>
+              <p class="role">Founder, OffType</p>
+              <p class="bio">Fifteen years on both sides of the table, client and agency, across automotive, retail, hospitality, and property. A dual perspective that shapes great working relationships.</p>
               <a class="li" href="https://www.linkedin.com/in/mariam-aslam-digger/" target="_blank" rel="noopener">LinkedIn</a>
             </div>
           </div>
@@ -1309,24 +1309,44 @@ a{ color:inherit; }
   var carousel = document.querySelector('[data-carousel]');
   if(!carousel) return;
 
-  if(typeof Swiper === 'undefined'){
-    carousel.classList.add('no-swiper');
-    return;
+  // Desktop: static 4-up grid (reuses the .no-swiper fallback layout).
+  // Mobile (<=760px): the real Swiper carousel.
+  var mq = window.matchMedia('(max-width:760px)');
+  var swiperInstance = null;
+
+  function shouldRunCarousel(){
+    return typeof Swiper !== 'undefined' && mq.matches;
   }
 
-  new Swiper(carousel.querySelector('.founders-swiper'), {
-    loop: true,
-    centeredSlides: true,
-    slidesPerView: 'auto',
-    spaceBetween: 24,
-    speed: 500,
-    slideToClickedSlide: true,
-    keyboard: { enabled: true },
-    navigation: {
-      nextEl: carousel.querySelector('.carousel-btn--next'),
-      prevEl: carousel.querySelector('.carousel-btn--prev')
+  function sync(){
+    if(shouldRunCarousel()){
+      if(swiperInstance) return;
+      carousel.classList.remove('no-swiper');
+      swiperInstance = new Swiper(carousel.querySelector('.founders-swiper'), {
+        loop: true,
+        centeredSlides: true,
+        slidesPerView: 'auto',
+        spaceBetween: 24,
+        speed: 500,
+        slideToClickedSlide: true,
+        keyboard: { enabled: true },
+        navigation: {
+          nextEl: carousel.querySelector('.carousel-btn--next'),
+          prevEl: carousel.querySelector('.carousel-btn--prev')
+        }
+      });
+    } else {
+      if(swiperInstance){
+        swiperInstance.destroy(true, true);
+        swiperInstance = null;
+      }
+      carousel.classList.add('no-swiper');
     }
-  });
+  }
+
+  sync();
+  if(mq.addEventListener) mq.addEventListener('change', sync);
+  else mq.addListener(sync);
 })();
 
 (function(){
