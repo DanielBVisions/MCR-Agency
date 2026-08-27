@@ -681,6 +681,9 @@ a{ color:inherit; }
   margin-top:8px;
 }
 .form-note{ font-size:13.5px; color:var(--muted); margin:0; }
+.form-error{ display:none; font-size:13.5px; color:#C6647A; margin:0; width:100%; }
+.form-error.is-visible{ display:block; }
+.btn[disabled]{ opacity:.55; cursor:default; }
 
 .done{
   display:none;
@@ -1075,6 +1078,7 @@ a{ color:inherit; }
           <div class="form-actions">
             <button class="btn" type="submit">Send request</button>
             <p class="form-note">We'll reply either way. No list, no newsletter, no follow-up sequence.</p>
+            <p class="form-error" role="alert">Something went wrong sending that — mind trying again, or email us directly?</p>
           </div>
         </div>
 
@@ -1112,6 +1116,9 @@ a{ color:inherit; }
   var form = document.getElementById('seatForm');
   if(!form) return;
 
+  var submitBtn = form.querySelector('.form-actions button[type="submit"]');
+  var errorNote = form.querySelector('.form-error');
+
   form.addEventListener('submit', function(e){
     e.preventDefault();
 
@@ -1125,24 +1132,27 @@ a{ color:inherit; }
       required[i].style.borderBottomColor = '';
     }
 
-    /* FORM ENDPOINT ----------------------------------------------------
-       Right now this just shows the confirmation. To make it live, drop
-       your endpoint in below (Formspree, Netlify Forms, HubSpot, a Zap —
-       whatever you're already using) and uncomment:
+    errorNote.classList.remove('is-visible');
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Sending…';
 
-       fetch('https://YOUR-ENDPOINT-HERE', {
-         method: 'POST',
-         headers: { 'Content-Type': 'application/json' },
-         body: JSON.stringify(Object.fromEntries(new FormData(form)))
-       });
-
-       Simplest no-backend option: swap the button for a mailto link that
-       pre-fills the subject, e.g.
-       <a class="btn" href="mailto:hello@example.com?subject=Seat%20request">
-    ------------------------------------------------------------------- */
-
-    form.classList.add('is-sent');
-    form.querySelector('.done').scrollIntoView({ block:'center', behavior:'smooth' });
+    fetch('/.netlify/functions/send-seat-request', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(Object.fromEntries(new FormData(form)))
+    })
+    .then(function(res){
+      if(!res.ok) throw new Error('send failed');
+      form.classList.add('is-sent');
+      form.querySelector('.done').scrollIntoView({ block:'center', behavior:'smooth' });
+    })
+    .catch(function(){
+      errorNote.classList.add('is-visible');
+    })
+    .finally(function(){
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Send request';
+    });
   });
 })();
 
