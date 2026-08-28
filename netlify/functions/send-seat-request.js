@@ -1,5 +1,5 @@
-const TO_ADDRESS = 'daniel.bate@visionsdesign.co.uk';
-const FROM_ADDRESS = 'MCR Agency Collective <onboarding@resend.dev>';
+const TO_ADDRESS = 'dan@perspectiv.design';
+const FROM_ADDRESS = 'MCR Agency Collective <hello@agencycollective.co.uk>';
 
 exports.handler = async function (event) {
   if (event.httpMethod !== 'POST') {
